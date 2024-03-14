@@ -8,39 +8,40 @@ import entities.Department;
 import entities.Seller;
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
+import model.dao.DepartmentDao;
 
-public class Program {
+public class Program2 {
 
 	public static void main(String[] args) {
 		
-		List<Seller> list = new ArrayList<>();
-		SellerDao sellerDao = DaoFactory.createSellerDao();
+		List<Department> list = new ArrayList<>();
+		DepartmentDao depDao = DaoFactory.createDepartmentDao();
+		Department department = new Department();
 		
 		System.out.println("=== TEST 1: Seller findById ===");
-		Seller seller = sellerDao.findById(3);
-		System.out.println(seller);
+		department = depDao.findById(1);
+		System.out.println(department);
 
 		System.out.println("\n=== TEST 2: Seller findByDepartment ===");
-		Department department = new Department(2, null);
-		list = sellerDao.findByDepartment(department);
-		list.forEach(System.out::println);
+		
 		
 		System.out.println("\n=== TEST 3: Seller findAll ===");
-		list = sellerDao.findAll();
+		list = depDao.findAll();
 		list.forEach(System.out::println);
 		
 		System.out.println("\n=== TEST 4: Seller Insert ===");
-		Seller newSeller = new Seller(null, "Greg", "greg@gmail.com", new Date(), 4000.00, department);
-		sellerDao.insert(newSeller);
+		depDao.insert(new Department(null, "Sex"));
+	
 		
 		System.out.println("\n=== TEST 5: Seller Update ===");
-		seller = sellerDao.findById(1);
-		seller.setName("Martha Waine");
-		sellerDao.update(seller);
+		department = depDao.findById(7);
+		department.setName("Shoes");
+		depDao.update(department);
 		System.out.println("Update complete");
 		
 		System.out.println("\n=== TEST 6: Delete ===");
-		sellerDao.deleteById(12);
+		depDao.deleteById(12);
+	
 	}
 
 }
